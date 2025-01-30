@@ -1,5 +1,6 @@
 <?php
 
+use Leugin\TestDovfac\Infrastructure\Controllers\UserController;
 use Leugin\TestDovfac\Infrastructure\middleware\JsonBodyParserMiddleware;
 use Slim\Factory\AppFactory;
 
@@ -17,6 +18,7 @@ $basePath = str_replace('/' . basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['S
 $app->setBasePath($basePath);
 
 
-$app->post('/', [\Leugin\TestDovfac\Infrastructure\Controllers\UserController::class, 'create'] );
+$app->post('/', [UserController::class, 'create'] );
+$app->put('/{userId}', [UserController::class, 'update'] );
 
 $app->run();

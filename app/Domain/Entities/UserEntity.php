@@ -8,7 +8,7 @@ use Leugin\TestDovfac\Shared\Values\UserId;
 use Leugin\TestDovfac\Shared\Values\UserName;
 use Leugin\TestDovfac\Shared\Values\UserPassword;
 
-class UserEntity
+class UserEntity implements \JsonSerializable
 {
     public function __construct(
         public readonly UserId $id,
@@ -28,4 +28,24 @@ class UserEntity
              new UserPassword($arrUser['password'])
          );
      }
+
+    public function jsonSerialize(): array
+    {
+        return [
+            'id' => $this->id->getValue(),
+            'name' => $this->name->getValue(),
+            'email' => $this->email->getValue(),
+            'password' => $this->password->getValue()
+        ];
+    }
+
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id->getValue(),
+            'name' => $this->name->getValue(),
+            'email' => $this->email->getValue(),
+            'password' => $this->password->getValue()
+        ];
+    }
 }
