@@ -34,7 +34,7 @@ class InMemoryUserRepository implements UserRepository
 
     public function update(UserId $id, UserDto $updateUserDto): UserEntity
     {
-        $index = array_search($id, array_column($this->users, 'id'));
+        $index = $this->findIndex($id);
         if ($index === false) {
             throw new DontExistUserException();
         }
@@ -49,11 +49,30 @@ class InMemoryUserRepository implements UserRepository
 
     }
 
-    public function delete(UserId $id): UserEntity
+    public function delete(UserId $id): bool
     {
-        // TODO: Implement delete() method.
+        $index = $this->findIndex($id);
+        if ($index === false) {
+            return  false;
+        }
+        unset($this->users[$index]);
+        return  true;
+    }
+    public function findOne(UserId $id): ?UserEntity
+    {
+        $index = $this->findIndex($id);
+        if ($index === false) {
+            return  null;
+        }
+
+        return $this->users[$index];
+
     }
 
+    public function findIndex(UserId $id ): bool|int
+    {
+        return array_search($id, array_column($this->users, 'id'));
+    }
     public static function pupulate()
     {
          return new static([
@@ -71,5 +90,6 @@ class InMemoryUserRepository implements UserRepository
              ]
          ]);
     }
+
 
 }

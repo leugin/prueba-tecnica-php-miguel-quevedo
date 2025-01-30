@@ -10,5 +10,6 @@ interface UserRepository
 {
     public function create(UserDto $createUserDto): UserEntity;
     public function update(UserId $id, UserDto $updateUserDto): UserEntity;
-    public function delete(UserId $id): UserEntity;
+    public function delete(UserId $id): bool;
+    public function findOne(UserId $id): ?UserEntity;
 }
