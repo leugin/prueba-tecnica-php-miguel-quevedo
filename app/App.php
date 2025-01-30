@@ -3,6 +3,8 @@
 namespace Leugin\TestDovfac;
 
 
+use DI\Container;
+
 class App
 {
     private \DI\Container $container;
@@ -18,7 +20,7 @@ class App
         $container = $builder->build();
         $this->container = $container;
     }
-    public function getContainer()
+    public function getContainer():Container
     {
         return $this->container;
     }
