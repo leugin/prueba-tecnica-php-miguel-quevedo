@@ -20,5 +20,6 @@ $app->setBasePath($basePath);
 
 $app->post('/', [UserController::class, 'create'] );
 $app->put('/{userId}', [UserController::class, 'update'] );
+$app->delete('/{userId}', [UserController::class, 'delete'] );
 
 $app->run();
