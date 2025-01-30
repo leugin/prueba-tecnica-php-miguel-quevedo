@@ -1,0 +1,10 @@
+services:
+  server:
+    working_dir: /var/www/html
+    build:
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/var/www/html
+    command: composer install
+
+

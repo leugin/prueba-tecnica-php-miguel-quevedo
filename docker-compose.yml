@@ -1,0 +1,12 @@
+services:
+  server:
+    working_dir: /var/www/html
+    build:
+      dockerfile: Dockerfile
+    ports:
+      - "${APP_PORT:-8080}:8080"
+    volumes:
+      - ./:/var/www/html
+    command: php -S 0.0.0.0:8080 -t public
+
+
