@@ -1,7 +1,6 @@
 <?php
 
-namespace Tests\Infrastructure\Repositories;
-
+namespace Tests;
 use DI\DependencyException;
 use DI\NotFoundException;
 use Leugin\TestDovfac\App;
@@ -12,7 +11,7 @@ use Leugin\TestDovfac\Shared\Values\UserName;
 use Leugin\TestDovfac\Shared\Values\UserRawPassword;
 use PHPUnit\Framework\TestCase;
 
-class UserRepositoryTest  extends TestCase
+class Base  extends TestCase
 {
     private  $app;
     public function __construct($name)
@@ -25,17 +24,9 @@ class UserRepositoryTest  extends TestCase
      * @throws DependencyException
      * @throws NotFoundException
      */
-    public function testCreateUser()
+    public function getService(string $service)
     {
-        /**@var  UserRepository $repository*/
-        $repository = $this->app->getContainer()->get(UserRepository::class);
+        return $this->app->getContainer()->get($service);
+    }
 
-        $dto = new UserDto(
-            new UserName("miguel "),
-            new UserEmail("miguel.quevedo.work@gmail.com"),
-            new UserRawPassword("password")
-        );
-        $user = $repository->create($dto);
-        $this->assertNotNull($user);
-     }
 }

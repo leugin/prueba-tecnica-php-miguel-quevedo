@@ -11,7 +11,7 @@ class App
 
     public function __construct()
     {
-        $configs = require_once (__DIR__ . '/../config/index.php');
+        $configs = require (__DIR__ . '/../config/index.php');
         $builder = new \DI\ContainerBuilder();
         $builder->addDefinitions($configs['providers']);
         $builder->useAutowiring(false);

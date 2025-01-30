@@ -2,7 +2,7 @@
 
 
 
-namespace Tests\App\Domain\User;
+namespace Tests\Domain\User;
 
 
 use Leugin\TestDovfac\Domain\Entities\UserEntity;
