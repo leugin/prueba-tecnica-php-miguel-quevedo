@@ -5,6 +5,7 @@ namespace Leugin\TestDovfac\Infrastructure\Repositories;
 use Leugin\TestDovfac\Domain\Repositories\UserRepository;
 use Leugin\TestDovfac\Domain\Entities\UserEntity;
 use Leugin\TestDovfac\Shared\Dtos\UserDto;
+use Leugin\TestDovfac\Shared\Exceptions\DontExistUserException;
 use Leugin\TestDovfac\Shared\Values\UserId;
 use Leugin\TestDovfac\Shared\Values\UserPassword;
 
@@ -33,6 +34,18 @@ class InMemoryUserRepository implements UserRepository
 
     public function update(UserId $id, UserDto $updateUserDto): UserEntity
     {
+        $index = array_search($id, array_column($this->users, 'id'));
+        if ($index === false) {
+            throw new DontExistUserException();
+        }
+        $entity = new UserEntity(
+            $id,
+            $updateUserDto->name,
+            $updateUserDto->email,
+            UserPassword::fromRaw($updateUserDto->password)
+        );
+        $this->users[$index] = $entity;
+        return $entity;
 
     }
 
