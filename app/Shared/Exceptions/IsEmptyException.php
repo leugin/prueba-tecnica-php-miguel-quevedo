@@ -1,6 +1,7 @@
 <?php
 namespace Leugin\TestDovfac\Shared\Exceptions;
 use DomainException;
+use Throwable;
 
 class IsEmptyException extends DomainException
 {

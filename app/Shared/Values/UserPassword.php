@@ -19,6 +19,15 @@ class UserPassword
         return $this;
     }
 
+    public function compareRaw(UserRawPassword $rawPassword)
+    {
+        return password_verify($rawPassword->getValue(), $this->value);
+    }
+
+    public static function fromRaw(UserRawPassword $rawPassword)
+    {
+        return new self(password_hash($rawPassword->getValue(), PASSWORD_DEFAULT));
+    }
 
 
 }

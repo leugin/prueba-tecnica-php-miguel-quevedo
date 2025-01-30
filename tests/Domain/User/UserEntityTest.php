@@ -7,6 +7,7 @@ namespace Tests\App\Domain\User;
 
 use Leugin\TestDovfac\Domain\Entities\UserEntity;
 use Leugin\TestDovfac\Shared\Exceptions\IsEmptyException;
+use Leugin\TestDovfac\Shared\Values\UserEmail;
 use Leugin\TestDovfac\Shared\Values\UserId;
 use Leugin\TestDovfac\Shared\Values\UserName;
 use Leugin\TestDovfac\Shared\Values\UserPassword;
@@ -20,6 +21,7 @@ final class UserEntityTest extends TestCase
         new UserEntity(
             new UserId(1),
             new UserName(''),
+            new UserEmail(''),
             new UserPassword('')
         );
     }
