@@ -29,10 +29,11 @@ class UserController
             $userRepository
         );
 
-        $useCase->__invoke($userDto);
+        $newUser = $useCase->__invoke($userDto);
         $response->getBody()
             ->write(json_encode([
-            'message' => 'User created successfully'
+            'message' => 'User created successfully',
+                'data'=>$newUser
         ]));
         return $response->withHeader('Content-Type', 'application/json');
 

@@ -7,6 +7,7 @@ use DI\Container;
 
 class App
 {
+   private static $instance = null;
     private \DI\Container $container;
 
     public function __construct()
@@ -23,5 +24,13 @@ class App
     public function getContainer():Container
     {
         return $this->container;
+    }
+
+    public static function get(): App
+    {
+        if (self::$instance == null) {
+            self::$instance = new App();
+        }
+        return self::$instance;
     }
 }

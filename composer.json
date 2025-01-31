@@ -25,6 +25,7 @@
         "php": ">=8.1",
         "php-di/php-di": "dev-master",
         "slim/psr7": "dev-master",
-        "slim/slim": "4.x-dev"
+        "slim/slim": "4.x-dev",
+      "ext-sqlite3": "*"
     }
 }
