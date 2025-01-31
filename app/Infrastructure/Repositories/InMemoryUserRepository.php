@@ -73,6 +73,10 @@ class InMemoryUserRepository implements UserRepository
     {
         return array_search($id, array_column($this->users, 'id'));
     }
+    public function all(): array
+    {
+        return $this->users;
+    }
     public static function pupulate()
     {
          return new static([
@@ -90,6 +94,7 @@ class InMemoryUserRepository implements UserRepository
              ]
          ]);
     }
+
 
 
 }

@@ -5,6 +5,7 @@ namespace Leugin\TestDovfac\Infrastructure\Controllers;
 use DI\Container;
 use Leugin\TestDovfac\Applications\CreateUserUseCase;
 use Leugin\TestDovfac\Applications\DeleteUserUseCase;
+use Leugin\TestDovfac\Applications\GetAllUserUseCase;
 use Leugin\TestDovfac\Applications\UpdateUserUseCase;
 use Leugin\TestDovfac\Domain\Repositories\UserRepository;
 use Leugin\TestDovfac\Shared\Dtos\UserDto;
@@ -63,9 +64,12 @@ class UserController
         $useCase = new DeleteUserUseCase($userRepository);
         $deleted = $useCase->__invoke(new UserId($userid));
 
+        $remainUsers = (new GetAllUserUseCase($userRepository))->__invoke();
+
         $response->getBody()
             ->write(json_encode([
-                'message' => $deleted ? 'User deleted successfully': 'User not found'
+                'message' =>'User deleted successfully',
+                'data' => $remainUsers
             ]));
         return $response->withHeader('Content-Type', 'application/json');
 
